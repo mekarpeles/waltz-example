@@ -12,9 +12,17 @@ Installation
 Installation occurs in 2 steps. First, clone the waltz repository as to a directory + <project-name> of your choosing. Secondly, you will use pip to install all dependent python modules which includes webpy (as the web framework), lazydb (for storing analytics in flatfile format), and nose (for testing with nosetests).
 
     # clones waltz to a directory named <project-name> instead of waltz
-
     git clone git@github.com:mekarpeles/waltz <project-name>
+    cd <project-name>
+    pip install -e . # installs dependencies
+
+    # cleanup
+    rm -rf dist
+    rm -rf waltz.egg-info
+
+Running (waltzing)
+------------------
 
     cd <project-name>
-
-    pip install -e . # installs dependencies
+    cd waltz
+    python main.py <port> #defaults to 8080
