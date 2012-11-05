@@ -14,10 +14,14 @@
 """
 
 import web
+import pickle
+from lazydb.lazydb import Db
+from copy import copy
 from reloader import PeriodicReloader
 from configs.config import server
 
-urls = ('/', 'Index',
+urls = ('/analytics', 'Analytics',
+        '/', 'Index',
         '/404', 'NotFound',
         '(.*)', 'NotFound')
 
@@ -34,10 +38,18 @@ def track(fn):
         passing @track optional arguments and parameters, as well as
         allows for the special case of class methods which require
         self - methods(self).
-        """
-        print web.ctx
+        """        
         def inner(*args, **kwargs):
-            return fn(*args, **kwargs)
+            """Copy web context environment, clean it to avoid
+            pickeling issues, and dump it to lazydb before returning
+            the route
+            """
+            db = Db('database')            
+            ctx = copy(web.ctx['env'])
+            del ctx['wsgi.errors']
+            del ctx['wsgi.input']
+            db.append('analytics', ctx)
+            return fn(*args, **kwargs)        
         return inner
     return tracked(fn)
 
@@ -46,6 +58,15 @@ class Index:
     @track
     def GET(self):
         return render.index()
+
+class Analytics:
+
+    def GET(self):
+        """Add your own key in server config"""
+        i = web.input(key="")
+        if i.key == server['secret']:
+            db = Db('database')
+            return db.get('analytics')
 
 class NotFound:
     def GET(self, err=None):
