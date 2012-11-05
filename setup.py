@@ -18,15 +18,22 @@ setup(
     url='http://github.com/mekarpeles/waltz',
     author='mek',
     author_email='michael.karpeles@gmail.com',
-    packages=['waltz', 'waltz.test'],
+    packages=[
+        'waltz',
+        'waltz.ballroom',
+        'waltz.configs',
+        'waltz.static',
+        'waltz.templates',
+        'waltz.test'
+        ],
     platforms='any',
-    install_requires=[
-        'lazydb >= 0.1.4',
-        'web >= 0.36',
-        'nose >= 1.1.2'
-    ],
     scripts=[],
     license='LICENSE',
+    install_requires=[
+        'lazydb >= 0.1.4',
+        'web.py >= 0.36',
+        'nose >= 1.1.2'
+    ],
     description="Waltz is a web.py framework for designing web apps in 3/4 time.",
     long_description=open('README.md').read(),
 )
