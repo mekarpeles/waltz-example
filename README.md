@@ -6,9 +6,13 @@ in 3/4 time. Waltz comes pre-configured, ready to run, and includes
 features like out-of-the-box support for analytics tracking. Waltz
 and never miss a beat.
 
+
+
+
 Installation
 ------------
 
-$ git clone git@github.com:mekarpeles/waltz
-$ # install dependencies: webpy, lazydb, nose
-$ pip install -e git@github.com:mekarpeles/waltz 
+Installation occurs in 2 steps. First, clone the waltz repository as to a directory + <project-name> of your choosing. Secondly, you will use pip to install all dependent python modules which includes webpy (as the web framework), lazydb (for storing analytics in flatfile format), and nose (for testing with nosetests).
+
+    $ git clone git@github.com:mekarpeles/waltz <project-name> # clones waltz to a directory named <project-name> instead of waltz
+    $ pip install -e git@github.com:mekarpeles/waltz # installs dependencies
