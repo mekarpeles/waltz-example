@@ -21,9 +21,9 @@ setup(
     packages=['waltz', 'waltz.test'],
     platforms='any',
     install_requires=[
-        'lazydb>=0.1.4',
-        'web>=0.36',
-        'nose>=1.1.2'
+        'lazydb >= 0.1.4',
+        'web >= 0.36',
+        'nose >= 1.1.2'
     ],
     scripts=[],
     license='LICENSE',
