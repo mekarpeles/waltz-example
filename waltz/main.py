@@ -38,7 +38,8 @@ def track(fn):
         print web.ctx
         def inner(*args, **kwargs):
             return fn(*args, **kwargs)
-    return tracked
+        return inner
+    return tracked(fn)
 
 class Index:
 
