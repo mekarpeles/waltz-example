@@ -20,7 +20,6 @@ try:
 except IOError as e:
     config.read('configs/server_defaults.cfg')
 
-DEBUG = bool(config.get("server", "debug"))
-DEBUG_MODE = bool(config.get("server", "debug"))
-
-server = {"debug_mode": DEBUG_MODE}
+server = {"debug_mode": bool(config.get("server", "debug")),
+          "secret": config.get("server", "secret")
+          }
