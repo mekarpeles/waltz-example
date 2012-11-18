@@ -25,4 +25,4 @@ Running (waltzing)
 
     cd <project-name>
     cd waltz
-    python main.py <port> #defaults to 8080
+    python waltz.py <port> #defaults to 8080

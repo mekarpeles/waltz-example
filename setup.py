@@ -14,7 +14,7 @@ from distutils.core import setup
 
 setup(
     name='waltz',
-    version='0.1.2',
+    version='0.1.3',
     url='http://github.com/mekarpeles/waltz',
     author='mek',
     author_email='michael.karpeles@gmail.com',
@@ -22,8 +22,9 @@ setup(
         'waltz',
         'waltz.ballroom',
         'waltz.configs',
-        'waltz.static',
         'waltz.templates',
+        'waltz.subapps',
+        'waltz.routes',
         'waltz.test'
         ],
     platforms='any',
