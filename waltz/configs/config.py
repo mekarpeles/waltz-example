@@ -11,6 +11,7 @@
 """
 
 import ConfigParser
+from os import getcwd
 
 config = ConfigParser.ConfigParser()
 
@@ -21,5 +22,9 @@ except IOError as e:
     config.read('configs/server_defaults.cfg')
 
 server = {"debug_mode": bool(config.get("server", "debug")),
-          "secret": config.get("server", "secret")
+          "secret": config.get("server", "secret"),
+          "paths": {"~": getcwd(),
+                    "sessions": config.get("paths", "sessions"),
+                    "db": config.get("paths", "db")
+                    }
           }
