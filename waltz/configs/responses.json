@@ -1,0 +1,1 @@
+{"SUCCESS": {"LOGGED_OUT": {"status": 1, "key": "LOGGED_OUT", "title": "Successfully Logged Out", "msg": "You have successfully logged out of your account."}}, "WARNING": {"ALREADY_LOGGED": {"status": 0, "key": "ALREADY_LOGGED", "title": "Already Logged In", "msg": "You are already logged in."}}}
