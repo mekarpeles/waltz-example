@@ -1,0 +1,4 @@
+Dancers wanted
+- protect html forms with auto-generated nonces (hidden inputs)
+- support for ip banning (in ballroom.security)
+- add API rate limiter (see armin ronacher's article)
