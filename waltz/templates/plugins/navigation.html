@@ -1,0 +1,13 @@
+$def with()
+
+<ul style="list-style-type: none; display: inline;">
+  <li style="float: left; padding: 5px;"><a href=""><img style="background-color: purple;" src="" alt="Logo"/></li>
+  <li style="float: left; padding: 5px;"><a href="/">waltz</a></li>
+  $if session.logged:
+    <li style="float: right; padding: 5px;"><a href="/logout">logout</a></li>
+    <li style="float: right; padding: 5px;">logged in as <a href="/account">$session.username</a> |</li>
+  $else:
+    <li style="float: right; padding: 5px;"><a href="/register">register</a></li>
+    <li style="float: right; padding: 5px;"><a href="/login">login</a> |</li>
+</ul>
+<div style="clear: both;"></div>
