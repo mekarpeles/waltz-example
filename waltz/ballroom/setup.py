@@ -36,11 +36,9 @@ def dancefloor(web, urls, sessions=False, autoreload=False):
 def init_sessions(web, app, storage_method, **kwargs):
     web.config.session_parameters['ignore_expiry'] = True
 
-    def default_session(web_session):
-        default_session = {'logged': False,
-                           'username': '',
-                           'uid': -1 # user id
-                           }
-        web_session.update(default_session)
+    default_session = {'logged': False,
+                       'username': '',
+                       'uid': -1 # user id
+                       }
     session = web.session.Session(app, storage_method, initializer=default_session)
     return session
