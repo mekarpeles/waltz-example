@@ -1,0 +1,16 @@
+$def with(resp=None)
+
+$:render.plugins.events(resp)
+
+<h1>New User Registration</h1>
+<p>Coming soon</p>
+
+$if not session.logged:
+  <form method="POST" action="/register">
+    <input type="text" name="username"/>
+    <input type="email" name="email"/>
+    <input type="password" name="passwd1"/>
+    <input type="password" name="passwd2"/>
+    <input type="submit"/>
+  </form>
+

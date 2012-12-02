@@ -1,0 +1,13 @@
+$def with (resp=None)
+
+$:render.plugins.events(resp)
+
+$if not session.logged:
+  <form method="POST" action="/login">
+    <input type="text" name="username"/>
+    <input type="password" name="password"/>
+    <input type="submit"/>
+  </form>
+
+
+
