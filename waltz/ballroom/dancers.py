@@ -6,5 +6,15 @@
 """
 
 import web
-session = lambda: web.ctx.session
-render = lambda: web.ctx.render
+
+class Coreographer(object):
+    @property
+    def session(self):
+        return web.ctx.session
+
+    @property
+    def render(self):
+        return web.ctx.render
+
+session = Coreographer().session
+render = Coreographer().render
