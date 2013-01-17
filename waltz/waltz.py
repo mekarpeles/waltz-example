@@ -16,7 +16,7 @@
 import web
 from subapps import api
 from routes import *
-from ballroom import setup
+from ballroom import setup, treasury
 from configs.config import server
 
 if server['debug_mode']:
@@ -34,7 +34,12 @@ urls = ('/api', api.subapp,
         '/', 'routes.home.Index',
         '(.*)', 'routes.responses.NotFound')
 
-ballroom = setup.dancefloor(web, urls, sessions=True, autoreload=False)
+session = {'cart': treasury.Cart(),
+           'logged': False,
+           'username': '',
+           'uid': -1
+           }
+ballroom = setup.dancefloor(web, urls, sessions=session, autoreload=False)
 
 if __name__ == "__main__":
     if server['debug_mode']:
