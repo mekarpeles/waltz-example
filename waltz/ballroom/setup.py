@@ -8,6 +8,7 @@
 """
 
 from configs.config import server
+from ballroom.treasury import Cart
 
 def dancefloor(web, urls, sessions=False, autoreload=False):
     app = web.application(urls, globals(), autoreload=autoreload)
@@ -34,11 +35,13 @@ def dancefloor(web, urls, sessions=False, autoreload=False):
     return app
 
 def init_sessions(web, app, storage_method, **kwargs):
+    """xxx use kwargs to select options like 'cart'."""
     web.config.session_parameters['ignore_expiry'] = True
 
     default_session = {'logged': False,
                        'username': '',
-                       'uid': -1 # user id
+                       'uid': -1, # user id
+                       'cart': Cart()
                        }
     session = web.session.Session(app, storage_method, initializer=default_session)
     return session
