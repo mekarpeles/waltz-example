@@ -14,10 +14,10 @@ from configs.config import server
 class Account:
 
     def GET(self):
-        if session().logged:
-            return render().account.index()
+        if session.logged:
+            return render.account.index()
         else:
-            return render().generic("Permission Denied", 
+            return render.generic("Permission Denied", 
                                     "Can't let you do that, " \
                                         "Starfox. Please " \
                                         "<a href='/login'>Login</a> " \
