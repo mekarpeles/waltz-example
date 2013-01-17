@@ -24,6 +24,7 @@ if server['debug_mode']:
 
 # consider moving urls to ballroom
 urls = ('/api', api.subapp,
+        '/cart/?', 'routes.cart.Cart',
         '/login/?', 'routes.auth.Login',
         '/logout/?', 'routes.auth.Logout',
         '/register/?', 'routes.auth.Register',
