@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+import string
+from lepl.apps.rfc3696 import Email
+
+ALPHANUMERICS = string.digits + string.lowercase
+MIXED_ALPHANUMERICS = ALPHANUMERICS + string.uppercase
+
 class Storage(dict):
     """
     A Storage object is like a dictionary except `obj.foo` can be used
@@ -341,7 +347,8 @@ def cond(predicate, consequence, alternative=None):
 
 def to36(q):
     """
-    Converts an integer to base 36 (a useful scheme for human-sayable IDs).
+    Converts an integer to base 36 (a useful scheme for human-sayable
+    IDs).
     
         >>> to36(35)
         'z'
@@ -358,10 +365,11 @@ def to36(q):
     
     """
     if q < 0: raise ValueError, "must supply a positive integer"
-    letters = "0123456789abcdefghijklmnopqrstuvwxyz"
     converted = []
     while q != 0:
         q, r = divmod(q, 36)
-        converted.insert(0, letters[r])
+        converted.insert(0, ALPHANUMERICS[r])
     return "".join(converted) or '0'
 
+def valid_email(email):
+    return Email()(email)

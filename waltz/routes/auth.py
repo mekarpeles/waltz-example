@@ -7,9 +7,8 @@
 """
 
 import web
-from ballroom import security
 from ballroom.decorations import track
-from ballroom.dancers import session, render
+from ballroom.dancers import session, render, User
 from configs.config import server
 
 # Events (message/responses)
@@ -35,20 +34,23 @@ class Login:
         i = web.input(username='', email='', password='', redir='/')
         i.email = i.email.lower()
 
-        ## Implement your own logic here:
-        #if (i.email and i.password) and auth_api._email_registered(i.email):
-        #    if auth_api._passwords_match(i.email, i.password):
-        #        session = auth_api._update_session_login(session, i.email)
-        #        if i.redir:
-        #            if not i.redir[0] == "/":
-        #                i.redir = "/" + i.redir
-        #            elif i.redir[0] == "/":
-        #                i.redir = "/"
-        #            raise web.seeother(web.ctx.homedomain + i.redir)
-        #        else:
-        #            raise web.seeother(web.ctx.homedomain + "/account/bookshelf")
-        #    return render.login(msg=ERROR_LOGIN_PASSWD['key'])
-        #return render.login(msg=ERROR_ACT_CREDS['key'])
+        u = User.register(i.username, i.password, email=i.email)
+
+        if User.authenticate(i.username, i.password, u.salt, u.uhash):
+            # Logic to populate session with user vars:
+            session.logged = True
+            session.username = i.username
+
+            # migrate elsewhere, maybe utils redir
+            if i.redir:
+                if not i.redir[0] == "/":
+                    i.redir = "/" + i.redir
+                elif i.redir[0] == "/":
+                    i.redir = "/"
+                raise web.seeother(web.ctx.homedomain + i.redir)
+            raise web.seeother(web.ctx.homedomain + "/account")
+        return render.login(msg=ERROR_LOGIN_PASSWD['key'])
+
 
         session.logged = True
         session.username = i.username
@@ -70,9 +72,18 @@ class Register:
     @track
     def GET(self):
         i = web.input(redir='')
+        if session.logged:
+            raise web.seeother('/account')
         return render.auth.register()
 
     def POST(self):
         i = web.input(username='', email='', passwd1='', passwd2='',
                       redir='')
-        return render.generic("registration workflow incomplete", "Registration backend coming soon, thanks for your patience!")
+        u = User.register(i.username, i.passwd1, i.passwd2, i.email)
+        session.logged = True
+        session.username = u['name']
+        return u
+        # replace above return statement with the following redirect
+        # once you've added this newly registered user into your
+        # queryable Users database 
+        #raise web.seeother('/account')
