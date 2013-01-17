@@ -12,7 +12,6 @@ from ballroom.decorations import track
 from ballroom.dancers import session, render
 from configs.config import server
 
-print server['responses']
 # Events (message/responses)
 ALREADY_LOGGED = server['responses']['WARNING']['ALREADY_LOGGED']
 LOGGED_OUT = server['responses']['SUCCESS']['LOGGED_OUT']
