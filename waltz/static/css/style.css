@@ -1,0 +1,137 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Donegal One', sans-serif;
+}
+
+#content {
+    padding: 15px;
+}
+
+h1 {
+    color: #222;
+    font-size: 1.5em;
+}
+
+h2 {
+}
+
+h3 {
+    padding: 0px;
+}
+
+#header {
+    background-image:url('/static/imgs/grid.png');
+    background-color: #eee;
+    padding: 10px 0px 5px 20px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+#logo {
+    font-family: 'Elsie', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    color: #5803A7;
+    text-shadow: 0px 1px 1px #fff;
+}
+
+.shadow {
+    -moz-box-shadow: 0px 3px 4px #bbb;
+    -webkit-box-shadow: 0px 3px 4px #bbb;
+    box-shadow: 0px 1px 4px #ddd;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#333333')";
+    /* For IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#333333');
+}
+
+.tid {
+    color: #555;
+}
+
+.project {
+    border: 1px solid #cde;
+    background-color: #def;
+    padding: 0px 5px;
+}
+
+.task {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f3f3f3;
+    margin-bottom: 10px;
+}
+
+.task .taskli {
+    float: left;
+    padding: 15px 10px;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid #eef;
+    height: 1px;
+}
+
+.addform  {
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    width: 650px;
+    margin: 10px auto;
+}
+
+.addformhr {
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.priority-0 {
+    border-left: 5px solid #666;
+}
+
+.priority-1 {
+    border-left: 5px solid skyblue;
+}
+
+.priority-2 {
+    border-left: 5px solid blue;
+}
+
+.priority-3 {
+    border-left: 5px solid yellow;
+}
+
+.priority-4 {
+    border-left: 5px solid orange;
+}
+
+.priority-5 {
+    border-left: 5px solid red;
+}
+
+.tag-great {
+    background-color: orange;
+    padding: 0px 5px;
+    margin-right: 5px;
+}
+
+.label {
+    background-color: #fff;
+    padding: 0px 5px;
+    margin-left: 5px;
+}
+
+ul.nav {
+    list-style-type: none;
+    display: inline;
+}
+
+ul.nav li {
+    float: right;
+    font-family: 'Quicksand', sans-serif;
+    padding: 5px;
+}
+
+ul.nav li a {
+    text-decoration: none;
+}
