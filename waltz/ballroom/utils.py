@@ -1,5 +1,15 @@
 #!/usr/bin/env python
 
+"""
+   ballroom.utils
+   ~~~~~~~~~~~~~~
+
+   A collection of utility functions and constants, many which were
+   originally authored by Aaron Swartz, Anand Chitipothu, and the
+   contributors of web.py. Props may be a more clever name for this
+   module, but understandability trumps cleverness in some cases.
+"""
+
 import string
 from lepl.apps.rfc3696 import Email
 

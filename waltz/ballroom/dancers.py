@@ -3,6 +3,14 @@
 """
     ballroom.dancers
     ~~~~~~~~~~~~~~~~    
+
+    Dancers is a confusing module which intends to act as a collection
+    of tools to manipulate the environment/context of each individual
+    client's web.py browser session (not necessarily a user account
+    session). This includes providing access to web.ctx specific
+    methods like sessions and resource renderers, as well as the
+    generic User class for interfacing with use accounts +
+    authentication.
 """
 
 import web
