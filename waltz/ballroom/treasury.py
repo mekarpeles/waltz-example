@@ -44,18 +44,12 @@
 
 """
 
-__author__  = ["Stephen Balaban", "Michael E. Karpeles"]
-__email__   = ["mail@stephenbalaban.com", "michael.karpeles@gmail.com"]
-__version__ = "0.0.2"
+__author__  = ["Michael E. Karpeles", "Stephen Balaban"]
+__email__   = ["michael.karpeles@gmail.com", "mail@stephenbalaban.com"]
+__version__ = "0.0.3"
 
 from decimal import Decimal 
 from ballroom.utils import Storage
-
-class Purchase(object):
-    def __init__(self, pid, cart, desc=""):
-        self.id = pid
-        self.time = datetime.datetime.now().ctime()
-        self.cart = cart #xxx TODO
 
 class Coupon(object):
     def __init__(self, cid, code, percent_off=0, value_off="0.00", pids=None, limit=1):
