@@ -303,9 +303,9 @@ class Cart(object):
         XXX Make sure len is working correctly over list of tuples
         returned by itemsdict.items()
         """
-        return len(self.itemsdict.items())
+        return sum([item.qty for k, item in self.itemsdict.items()])
 
-    def remove(self, pid):
+    def remove(self, pid, amt=None):
         """removes ALL of an item from cart based on product id 
 
         >>> #using id
@@ -327,7 +327,8 @@ class Cart(object):
                                 "type %s" % (pid, type(pid)))
         if not self.itemsdict.has_key(pid):
             raise KeyError('no item found')
-        del self.itemsdict[pid]
+        else:
+            del self.itemsdict[pid]
         self.invariants()
         return self
 
