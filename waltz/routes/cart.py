@@ -1,9 +1,10 @@
 #-*- coding: utf-8 -*-
 
 """
-    routes.account
-    ~~~~~~~~~~~~~~
-    Account pages for logged in users
+    routes.cart
+    ~~~~~~~~~~~
+    Logic for interfacing with the shopping cart, if the route is
+    enabled.    
 """
 
 import web
@@ -26,11 +27,10 @@ class Cart:
             p = Product(pid, "Example Product", price="1.00")
             session.cart.add(p)
         if i.op == "remove" and pid:
-            # BROKEN!!!
             session.cart.remove(pid)
         if i.op == "reset":
             session.cart.empty()
-        return session.cart
+        return render.cart.index()
 
     def POST(self):
         pass
