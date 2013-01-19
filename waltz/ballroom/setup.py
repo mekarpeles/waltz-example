@@ -9,7 +9,7 @@
 
 from configs.config import server
 
-def dancefloor(web, urls, sessions=False, autoreload=False):
+def dancefloor(web, urls, sessions=False, autoreload=False, **kwargs):
     app = web.application(urls, globals(), autoreload=autoreload)
 
     _globals = {'ctx': web.ctx,}
@@ -17,9 +17,12 @@ def dancefloor(web, urls, sessions=False, autoreload=False):
     render  = web.template.render('templates/', base='base', globals=_globals)
     _globals['render'] = render
 
-    if sessions:
-        storage_method = web.session.DiskStore(server['paths']['sessions'])
-        session = start_sessions(web, app, storage_method)        
+    def default_storage():
+        return web.session.DiskStore(server['paths']['sessions'])
+
+    if sessions is not False:
+        store = kwargs.get('storage_method', default_storage())
+        session = start_sessions(web, app, store)
         def session_hook(): web.ctx.session = session
         app.add_processor(web.loadhook(session_hook))
 
@@ -28,13 +31,9 @@ def dancefloor(web, urls, sessions=False, autoreload=False):
     return app
 
 
-def start_sessions(web, app, storage_method, **kwargs):
-    web.config.session_parameters['ignore_expiry'] = False
-
-    def default_session(web_session):
-        default_session = {'logged': False,
-                           'username': ''
-                           }
-        web_session.update(default_session)
-    session = web.session.Session(app, storage_method, initializer=default_session)
-    return session
+def start_sessions(web, app, store, **kwargs):
+    web.config.session_parameters['ignore_expiry'] = True
+    default_session = {'logged': False,
+                       'username': ''
+                       }
+    return web.session.Session(app, store, initializer=default_session)
