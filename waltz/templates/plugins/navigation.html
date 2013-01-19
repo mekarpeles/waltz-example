@@ -1,0 +1,12 @@
+$def with()
+
+<ul class="nav">
+  $if session.logged:
+    <li><a href="/logout">logout</a></li>
+    <li>logged in as <a href="/account">$session.username</a> |</li>
+  $else:
+    <li><a href="/register">register</a></li>
+    <li><a href="/login">login</a> |</li>
+  <li><a href="/cart">Cart ($session.cart.qty)</a> |</li>
+</ul>
+<div style="clear: both;"></div>

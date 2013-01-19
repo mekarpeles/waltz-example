@@ -16,23 +16,32 @@
 import web
 from subapps import api
 from routes import *
-from ballroom import setup
+from ballroom import setup, treasury
 from configs.config import server
 
 if server['debug_mode']:
     from reloader import PeriodicReloader
 
+# consider moving urls to ballroom
 urls = ('/api', api.subapp,
-        '/login', 'routes.auth.Login',
-        '/logout', 'routes.auth.Logout',
-        '/analytics', 'routes.analytics.Analytics',
+        '/cart/?', 'routes.cart.Cart',
+        '/login/?', 'routes.auth.Login',
+        '/logout/?', 'routes.auth.Logout',
+        '/register/?', 'routes.auth.Register',
+        '/account/?', 'routes.account.Account',
+        '/analytics/?', 'routes.analytics.Analytics',
         '/404', 'routes.responses.NotFound',
         '/', 'routes.home.Index',
         '(.*)', 'routes.responses.NotFound')
 
-app = setup.dancefloor(web, urls, sessions=True, autoreload=False)
+session = {'cart': treasury.Cart(),
+           'logged': False,
+           'username': '',
+           'uid': -1
+           }
+ballroom = setup.dancefloor(web, urls, sessions=session, autoreload=False)
 
 if __name__ == "__main__":
     if server['debug_mode']:
         PeriodicReloader()
-    app.run()
+    ballroom.run()

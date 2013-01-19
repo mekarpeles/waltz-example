@@ -1,0 +1,15 @@
+$def with ()
+
+<h1>Cart</h1>
+$session.cart
+
+<ul>
+  $for item in session.cart.itemsdict:
+    <li>$session.cart.itemsdict[item] <a href="/cart?op=remove&ref=$(session.cart.itemsdict[item].id)">[x]</a></li>
+</ul>
+
+<div>
+  <h3><a href="/cart?op=add&ref=1">Add Test Item</a></h3>
+</div>
+
+

@@ -33,6 +33,7 @@ setup(
     install_requires=[
         'lazydb >= 0.1.4',
         'web.py >= 0.36',
+        'lepl >= 5.1.3',
         'nose >= 1.1.2'
     ],
     description="Waltz is a web.py framework for designing web apps in 3/4 time.",

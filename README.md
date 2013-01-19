@@ -26,3 +26,9 @@ Running (waltzing)
     cd <project-name>
     cd waltz
     python waltz.py <port> #defaults to 8080
+
+TODO
+----
+
+* Oauth Integration
+* Payment Processing Modules (consider stripe checkout)

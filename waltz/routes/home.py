@@ -13,4 +13,4 @@ from ballroom.dancers import session, render
 class Index:
     @track
     def GET(self):
-        return render().index()
+        return render.index()
