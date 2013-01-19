@@ -9,17 +9,30 @@
 
 from configs.config import server
 
-def dancefloor(web, urls, sessions=False, autoreload=False):
-    app = web.application(urls, globals(), autoreload=autoreload)
+def dancefloor(web, urls, sessions=False, autoreload=False, **kwargs):
+    """
+    **kwargs:
+        globals - a dict of vars or funcs which will be made globablly
+                  available within the scope of html templates' context
+        storage_method - can be overridden the web.session storage method
+                         in the event the user prefers a DBStore
+        session - a dictionary representing a default init'd session
+    """
+    app = web.application(urls, globals(), autoreload=autoreload) 
+    
+    env = {'ctx': web.ctx}
+    env.update(kwargs.get('globals', {}))
+    slender = web.template.render('templates/', globals=env)
+    render = web.template.render('templates/', base='base', globals=env)
+    env['render'] = slender
 
-    _globals = {'ctx': web.ctx}
-    slender  = web.template.render('templates/', globals=_globals)
-    render  = web.template.render('templates/', base='base', globals=_globals)
-    _globals['render'] = slender
+    def default_storage():
+        return web.session.DiskStore(server['paths']['sessions'])
 
-    if sessions:
-        storage_method = web.session.DiskStore(server['paths']['sessions'])
-        session = init_sessions(web, app, storage_method)
+    if sessions is not False:
+        store = kwargs.get('storage_method', default_storage())
+        session = init_sessions(web, app, store, sessions)
+
         def inject_session():
             """closure; uncalled function which wraps session is
             passed to the web loadhook and invoked elsewhere and at a
@@ -27,20 +40,13 @@ def dancefloor(web, urls, sessions=False, autoreload=False):
             """
             web.ctx.session = session
         app.add_processor(web.loadhook(inject_session))
-        _globals['session'] = session
+        env['session'] = session
 
     def render_hook(): web.ctx.render = render
     app.add_processor(web.loadhook(render_hook))
     return app
 
-def init_sessions(web, app, storage_method, **kwargs):
+def init_sessions(web, app, store, session):
+    """kwargs is used to inject options like 'cart' into session."""
     web.config.session_parameters['ignore_expiry'] = True
-
-    def default_session(web_session):
-        default_session = {'logged': False,
-                           'username': '',
-                           'uid': -1 # user id
-                           }
-        web_session.update(default_session)
-    session = web.session.Session(app, storage_method, initializer=default_session)
-    return session
+    return web.session.Session(app, store, initializer=session)
