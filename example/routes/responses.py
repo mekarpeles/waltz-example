@@ -6,7 +6,7 @@
     Handles static responses like 404
 """
 
-import web
+from waltz import web
 
 class NotFound:
     def GET(self, err=None):

@@ -6,11 +6,9 @@
     Homepage routes
 """
 
-import web
-from ballroom.decorations import track
-from ballroom.dancers import session, render
+from waltz import track, render
 
 class Index:
     @track
     def GET(self):
-        return render.index()
+        return render().index()

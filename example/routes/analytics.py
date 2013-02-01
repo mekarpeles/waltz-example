@@ -6,7 +6,7 @@
     Analytics routes
 """
 
-import web
+from waltz import import web
 from lazydb.lazydb import Db
 from configs.config import server
 

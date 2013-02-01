@@ -6,5 +6,4 @@
     Routes handle all of the footwork
 """
 
-import web
-from configs.config import server
+
