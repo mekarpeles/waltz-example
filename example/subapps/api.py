@@ -5,7 +5,7 @@
     ~~~~~~~~~~~
 """
 
-import web
+from waltz import web
 import json
 from configs.config import server
 
