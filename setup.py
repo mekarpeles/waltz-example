@@ -1,41 +1,34 @@
 #-*- coding: utf-8 -*-
 
 """
-    waltz
-    ~~~~~
+    ballet
+    ~~~~~~
+    Ballet is an example waltz application
 
     Setup
     `````
-
-    $ pip install waltz    
+    $ sudo pip install -e .
 """
 
 from distutils.core import setup
 
 setup(
-    name='waltz',
-    version='0.1.4',
-    url='http://github.com/mekarpeles/waltz',
+    name='ballet',
+    version='0.1.62',
+    url='http://github.com/mekarpeles/waltz-example',
     author='mek',
     author_email='michael.karpeles@gmail.com',
     packages=[
-        'waltz',
-        'waltz.ballroom',
-        'waltz.configs',
-        'waltz.templates',
-        'waltz.subapps',
-        'waltz.routes',
-        'waltz.test'
+        'example',
+        'example.routes',
+        'example.subapps'
         ],
     platforms='any',
     scripts=[],
     license='LICENSE',
     install_requires=[
-        'lazydb >= 0.1.6',
-        'web.py >= 0.36',
-        'lepl >= 5.1.3',
-        'nose >= 1.1.2'
+        'waltz >= 0.1.62'
     ],
-    description="Waltz is a web.py framework for designing web apps in 3/4 time.",
-    long_description=open('README.md').read(),
+    description="Example Waltz Application - Waltz is a web.py framework for designing web apps in 3/4 time.",
+    long_description=open('README.txt').read(),
 )
